@@ -1,0 +1,7 @@
+{
+  "name": "empire-duel", "version": "2.0.0", "private": true,
+  "description": "Jeu original de stratégie multijoueur de 2 à 4 joueurs",
+  "scripts": {"start": "node server.js"},
+  "engines": {"node": ">=18"},
+  "dependencies": {"ws": "^8.18.0"}
+}
