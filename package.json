@@ -1,0 +1,9 @@
+{
+  "name": "empire-duel-remaster",
+  "version": "3.0.0",
+  "private": true,
+  "description": "RTS multijoueur original, jouable de 2 à 4 joueurs sur navigateur",
+  "scripts": {"start": "node server.js"},
+  "engines": {"node": ">=18"},
+  "dependencies": {"ws": "^8.18.0"}
+}
