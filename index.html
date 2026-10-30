@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>EMPIRE DUEL — Remaster • stratégie multijoueur</title>
+<link rel="stylesheet" href="/style.css"/></head>
+<body>
+<div id="shell">
+  <header class="topbar">
+    <div class="brand"><span class="crest-mark">E<span>✦</span></span><div><strong>EMPIRE <em>DUEL</em></strong><small>ÉDITION ROYAUMES · RTS MULTIJOUEUR</small></div></div>
+    <div class="top-resources">
+      <div class="resitem"><span class="resicon wood">♠</span><div><span>BOIS</span><b id="wood">230</b></div></div>
+      <div class="resitem"><span class="resicon food">❧</span><div><span>VIVRES</span><b id="food">245</b></div></div>
+      <div class="resitem"><span class="resicon gold">◆</span><div><span>OR</span><b id="gold">150</b></div></div>
+      <div class="resitem"><span class="resicon pop">♟</span><div><span>POPULATION</span><b id="pop">4/10</b></div></div>
+    </div>
+    <div class="top-status"><span class="signal" id="signal"></span><span id="connection">HORS LIGNE</span></div>
+  </header>
+  <div class="stage">
+    <aside class="left-panel">
+      <div class="section-head">LE SALON <span id="roomlabel">—</span></div>
+      <div class="own-faction"><span id="factionChip" class="faction-chip"></span><div><strong id="playerlabel">En attente</strong><small id="opponent">0 / 4 joueurs en ligne</small></div></div>
+      <div id="playerList" class="player-list"></div>
+      <button id="share" class="outline-button">⧉ &nbsp; Copier l'invitation</button>
+      <div class="panel-divider"></div>
+      <div class="section-head">MISSION</div>
+      <h3>Domine les royaumes</h3><p class="muted">Développe ton économie, recrute une armée et détruis les centres-villes rivaux.</p>
+      <div class="objectives">
+        <div><i>01</i><span>Villageois → arbres, champs, mines</span></div>
+        <div><i>02</i><span>Construis une caserne avec un villageois</span></div>
+        <div><i>03</i><span>Recrute des soldats et attaque</span></div>
+      </div>
+      <div class="panel-divider"></div>
+      <div class="section-head">COMMANDES</div>
+      <div class="shortcuts"><span><kbd>Clic</kbd> Sélectionner / ordonner</span><span><kbd>Clic droit</kbd> Déplacer, récolter, attaquer</span><span><kbd>Glisser</kbd> Sélection multiple</span><span><kbd>W A S D</kbd> Déplacer la caméra</span><span><kbd>Molette</kbd> Zoomer / dézoomer</span><span><kbd>Esc</kbd> Annuler</span></div>
+      <p class="bottom-muted">Chaque joueur voit son propre royaume au centre de l'écran.</p>
+    </aside>
+    <section class="battlefield">
+      <canvas id="game" aria-label="Champ de bataille du jeu" tabindex="0"></canvas>
+      <div class="map-top"><span class="map-pill"><span class="diamond">◆</span> <span id="mapTitle">TERRES DE LA COURONNE</span></span><div class="map-tools"><button id="zoomOut" aria-label="Dézoomer">−</button><span id="zoomLabel">100%</span><button id="zoomIn" aria-label="Zoomer">+</button><button id="home" title="Revenir à ton château">⌂</button></div></div>
+      <div id="toast" class="toast">Sélectionne un de tes villageois pour commencer.</div>
+      <div class="minimap-frame"><div class="minimap-caption">CARTE TACTIQUE <span>30 × 22</span></div><canvas id="mini" width="240" height="176" aria-label="Mini carte, cliquer pour déplacer la caméra"></canvas><div class="mini-foot">Clique pour déplacer la vue</div></div>
+      <div id="buildHint" class="build-hint hidden">PLACE TON BÂTIMENT <small>Clique sur le terrain • Esc pour annuler</small></div>
+      <div class="map-bottom"><span><strong>◆</strong> Pointeur : <span id="coords">—</span></span><span id="message">En attente des joueurs...</span></div>
+    </section>
+    <aside class="right-panel">
+      <div class="section-head">PANNEAU DE COMMANDE</div>
+      <div id="selectionArt" class="selection-art"><div class="selection-icon">✣</div><div>SÉLECTIONNE UNE UNITÉ</div></div>
+      <div class="entity-head"><h2 id="selectedName">Aucune sélection</h2><span id="selectedType">—</span></div>
+      <p id="selectedDescription" class="muted">Clique sur l'une de tes unités ou sur ton centre-ville pour afficher les actions disponibles.</p>
+      <div id="healthbar" class="healthbar hidden"><span id="healthfill"></span></div>
+      <p id="healthtext" class="healthtext"></p>
+      <div class="panel-divider"></div>
+      <div class="section-head">ACTIONS DISPONIBLES</div>
+      <div id="actions" class="actions"><p class="muted">Choisis une unité pour afficher les commandes.</p></div>
+      <p id="unitOrder" class="order-label"></p>
+      <div class="right-foot"><span class="dot-gold">✦</span> La guerre se gagne d'abord par l'économie.</div>
+    </aside>
+  </div>
+</div>
+<div id="welcome" class="overlay">
+ <div class="welcome-panel">
+  <div class="insignia"><span>♜</span><div>EMPIRE <em>DUEL</em></div><small>REMASTER · ROYAUMES EN GUERRE</small></div>
+  <div class="gold-rule"></div>
+  <h1>Le trône n'attend qu'un conquérant.</h1>
+  <p>Un vrai jeu de stratégie en temps réel dans ton navigateur : dirige tes villageois, récolte les ressources, érige des bâtiments, lève une armée et affronte jusqu'à trois amis.</p>
+  <div class="feature-row"><span>2–4 JOUEURS</span><span>CARTE EXPLORABLE</span><span>COMBATS EN DIRECT</span></div>
+  <label for="room">CODE DU SALON</label>
+  <div class="joinrow"><input id="room" maxlength="8" placeholder="EX : ROYAUME" spellcheck="false" autocomplete="off"/><button id="join">ENTRER DANS LA PARTIE <span>→</span></button></div>
+  <small class="joinhint">Entre le même code que tes amis, ou partage ton lien après connexion. Tes parties se jouent en temps réel.</small>
+  <p id="joinError" class="error"></p>
+ </div>
+</div>
+<div id="victory" class="outcome hidden"><div class="outcome-card"><span id="victoryIcon">♛</span><h1 id="victoryTitle">VICTOIRE</h1><p id="victoryDescription">Le royaume domine le continent.</p><button onclick="location.href='/'">NOUVELLE PARTIE</button></div></div>
+<script src="/app.js"></script>
+</body></html>
